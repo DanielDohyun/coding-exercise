@@ -2,6 +2,8 @@
   display: grid;
   grid-template-columns: 50% 50%;
   position: relative;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .second__imgContainer {
@@ -11,6 +13,10 @@
   position: absolute;
   display: flex;
   flex-direction: column;
+}
+
+.second__imgContainer::-webkit-scrollbar {
+  display: none;
 }
 
 .second__1 {
