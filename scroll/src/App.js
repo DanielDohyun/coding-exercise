@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useIntersection } from "./useIntersection";
 import Second from "./Second";
 import handleViewport from "react-in-viewport";
@@ -21,6 +21,7 @@ const ViewportBlock = handleViewport(Block /** options: {}, config: {} **/);
 
 function App() {
   const ref = useRef();
+
   // const inViewport = useIntersection(ref, "-200px");
   console.log(ref);
   const third = document.querySelector(".app__third");
@@ -28,9 +29,34 @@ function App() {
   if (inViewport) {
     console.log("in viewport:", third);
   }
+
+  const [visited, setVisited] = useState(false);
+  useEffect(() => {
+    localStorage.setItem("visited", "true");
+    console.log("set true");
+  });
+
+  //runs once at the first render
+  useEffect(() => {
+    const visited = JSON.parse(localStorage.getItem("visited"));
+    if (visited) {
+      setVisited(true);
+      console.log(visited);
+    }
+  }, []);
+
+  // window.addEventListener("beforeunload", function (event) {
+  //   localStorage.clear();
+  // });
+
+  window.onbeforeunload = function () {
+    localStorage.clear();
+  };
+
   return (
     <div className="app">
-      <div className="app__first"></div>
+      {!visited && <div className="app__first"></div>}
+      {visited && <h1>hi</h1>}
       <ViewportBlock
         onEnterViewport={() => console.log("enter")}
         onLeaveViewport={() => console.log("leave")}
