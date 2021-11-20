@@ -23,7 +23,7 @@ function App() {
   const ref = useRef();
 
   // const inViewport = useIntersection(ref, "-200px");
-  console.log(ref);
+  // console.log(ref);
   const third = document.querySelector(".app__third");
   const inViewport = useIntersection(third, "0px");
   if (inViewport) {
@@ -33,7 +33,7 @@ function App() {
   const [visited, setVisited] = useState(false);
   useEffect(() => {
     localStorage.setItem("visited", "true");
-    console.log("set true");
+    // console.log("set true");
   });
 
   //runs once at the first render
@@ -53,8 +53,55 @@ function App() {
     localStorage.clear();
   };
 
+  const calculateTimeLeft = () => {
+    let difference = +new Date(`2021-11-21`) - +new Date();
+
+    //add offset to hours => to get user's local time
+    const offset = +new Date().getTimezoneOffset() / 60;
+
+    // console.log(typeof offset);
+    // console.log(offset);
+    let timeLeft = {};
+
+    if (difference > 0) {
+      timeLeft = {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60) + offset) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    }
+
+    return timeLeft;
+  };
+
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+    // Clear timeout if the component is unmounted
+    return () => clearTimeout(timer);
+  });
+
+  const timerComponents = [];
+
+  Object.keys(timeLeft).forEach((interval) => {
+    if (!timeLeft[interval]) {
+      return;
+    }
+
+    timerComponents.push(
+      <span>
+        {timeLeft[interval]} {interval}{" "}
+      </span>
+    );
+  });
+
   return (
     <div className="app">
+      {timerComponents.length ? timerComponents : <span>Time's up!</span>}
       {!visited && <div className="app__first"></div>}
       {visited && <h1>hi</h1>}
       <ViewportBlock
