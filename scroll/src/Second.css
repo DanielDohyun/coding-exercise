@@ -1,29 +1,33 @@
 .second {
   display: grid;
   grid-template-columns: 50% 50%;
-  position: relative;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  align-items: center;
 }
 
 .second__imgContainer {
-  height: 100%;
-  overflow-y: scroll;
+  position: relative;
+}
+
+.second__comparisonImg {
   width: 100%;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-}
-
-.second__imgContainer::-webkit-scrollbar {
-  display: none;
-}
-
-.second__1 {
-  z-index: -2;
-}
-
-.second__img {
-  width: 50%;
   height: 100%;
+  overflow: hidden;
+}
+
+.afterImage {
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  transform: translate(100%, 0px);
+}
+.afterImage img {
+  transform: translate(-100%, 0px);
+}
+.comparisonImage img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  opacity: 1;
+  transition: opacity 0;
 }

@@ -2,11 +2,11 @@
 }
 
 .app__first {
-  height: 290vh;
+  height: 100vh;
   background-color: blue;
 }
 
 .app__third {
-  height: 200vh;
+  height: 100vh;
   background-color: red;
 }
