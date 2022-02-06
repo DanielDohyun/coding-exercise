@@ -1,0 +1,26 @@
+constant time: 0(1)
+logarithmic: 0(log(n))
+linear: 0(n)
+linearithmic: 0(nlog(n))
+quadric: 0(n^2)
+cubic: 0(n^3)
+exponential: 0(b^n)
+factorial: 0(n!)
+
+n^2 example
+for (let i = 0; i<n; i++) {
+    for(let j = 0; j<n j++)
+}
+
+for (let i = 0; i<n; i++) {
+    for(let j = 1; j<n j++)
+}  ==> 0(n(n+1)/2) = 0(n^2 + n/2) = n^2
+
+binary search = 0(log2(n)) = 0(log(n)) = log
+
+finding all subsets of a set = 0(2^n)
+finding all permutations of a string = 0(n!)
+sorting using mergesort - 0(nlog(n))
+iterating over all the cells in a matrix of size n by m = 0(nm)
+
+
